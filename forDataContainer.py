@@ -59,6 +59,15 @@ print in_list
 print "In GRL"
 print grl_list
 
+def find_missing(grl_list,file_list):
+    missing_list=[]
+    for i in grl_list:
+        if i not in file_list:
+            missing_list.append(i)
+            print i
+    return missing_list
+
+
 
 result =  all(elem in in_list  for elem in grl_list)
 #print result                                                                                                                                                                                                                                 
@@ -69,4 +78,7 @@ if result:
     print final_list
 else :
     print "FALSE, not satisfy GRL"
+    print "missing files are: "
+    mis_list=find_missing(grl_list,in_list)
+    print "mis/tot_Grl=",len(mis_list),"/",len(grl_list)
 
