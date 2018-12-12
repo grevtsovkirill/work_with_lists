@@ -31,3 +31,6 @@ print "Available"
 print in_list
 print "In GRL"
 print grl_list
+
+result =  all(elem in in_list  for elem in grl_list)
+print result
