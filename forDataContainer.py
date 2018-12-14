@@ -61,11 +61,13 @@ print grl_list
 
 def find_missing(grl_list,file_list):
     missing_list=[]
+    overlaying_list=[]
     for i in grl_list:
         if i not in file_list:
             missing_list.append(i)
-            print i
-    return missing_list
+            #print i                                                                                                                                                                                                                          
+	else: overlaying_list.append(i)
+    return missing_list,overlaying_list
 
 
 
@@ -75,10 +77,16 @@ if result:
     print "Yes, available samples contains all elements from GRL"
     final_list=create_container_list(av_list,grl_list)
     print "files for data container:"
-    print final_list
+    #print final_list                                                                                                                                                                                                                         
+    out_file='DataContainer_'+in_file
+    with open(out_file,'w') as f:
+        f.write("\n".join(final_list))
+
+    mis_list,overl_list=find_missing(grl_list,in_list)
+    print "mis/tot_Grl=",len(mis_list),"/",len(grl_list),"; av/overlap",len(av_list),"/",len(overl_list)
 else :
     print "FALSE, not satisfy GRL"
     print "missing files are: "
-    mis_list=find_missing(grl_list,in_list)
-    print "mis/tot_Grl=",len(mis_list),"/",len(grl_list)
+    mis_list,overl_list=find_missing(grl_list,in_list)
+    print "mis/tot_Grl=",len(mis_list),"/",len(grl_list),"; av/overlap",len(av_list),"/",len(overl_list)
 
